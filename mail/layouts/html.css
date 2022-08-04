@@ -1,0 +1,42 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+table, td {
+    border-collapse: collapse;
+}
+
+table.table th,
+table.table td {
+    padding: 5px 8px;
+}
+
+table.table-bordered {
+    border-collapse: collapse;
+}
+
+table.table-bordered th,
+table.table-bordered td {
+    border: 1px solid #000;
+}
+
+blockquote, .blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    border-left: 5px solid #000;
+}
+
+hr, .hr {
+    border: 0;
+    border-bottom: 1px solid #000;
+    margin: 20px 0; 
+}

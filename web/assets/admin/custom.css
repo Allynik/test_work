@@ -1,0 +1,137 @@
+body {
+    font-family:-apple-system,blinkmacsystemfont,"Segoe UI",roboto,"Helvetica Neue",arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+}
+
+.toggle {
+    padding: 28px 14px;
+}
+
+td span {
+  line-height: normal;
+}
+
+.grid-view table tr th,
+.grid-view table tr td {
+    vertical-align: middle;
+}
+
+.grid-view .summary {
+    padding: 6px;
+    font-size: 0.95em;
+    text-align: right;
+}
+
+.grid-view .row-level-0 td.cell-name {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.grid-view .row-level-1 td.cell-name {
+    font-size: 14px;
+    line-height: 1;
+}
+
+.grid-view .row-level-2 td.cell-name {
+    font-size: 13px;
+    line-height: 1;
+}
+
+.grid-view .row-level-3 td.cell-name
+.grid-view .row-level-4 td.cell-name
+.grid-view .row-level-5 td.cell-name
+.grid-view .row-level-6 td.cell-name {
+    font-size: 12px;
+    line-height: 1;
+}
+
+.required label:after {
+    content: "\00a0*\00a0";
+    color:red; 
+}
+
+.required .custom-checkbox label:after {
+    right: -1.5rem;
+    left: auto;
+}
+
+.text-overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.grid-view {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.grid-view a[data-sort] {
+    padding-right: .8em;
+    display: inline-block;
+}
+
+.grid-view a[data-sort].asc:after {
+    content: "\00a0\25bc\00a0";
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    font-size: 80%;
+}
+
+.grid-view a[data-sort].desc:after {
+    content: "\00a0\25b2\00a0";
+    display: inline-block;
+    vertical-align: middle;
+    position: absolute;
+    font-size: 80%;
+}
+
+.grid-view .btn-group {
+    display: flex;
+}
+
+.form-control.is-invalid, .was-validated .form-control:invalid,
+.was-validated .form-control:invalid, .form-control.is-invalid {
+    background-image: none;
+}
+
+.form-control.is-valid, .was-validated .form-control:valid,
+.was-validated .form-control:valid, .form-control.is-valid {
+    background-image: none;
+}
+
+.upload-widget::after {
+    clear: left;
+    content: "";
+    display: table;
+}
+
+.upload-widget-text {
+    display: block;
+}
+
+.upload-widget-image {
+    float: left;
+    margin-right: 1em;
+}
+
+.content-wrapper > .content {
+    padding-bottom: 2rem;
+}
+
+.nav-sidebar .nav-link {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-sidebar .nav-link p {
+    display: inline;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

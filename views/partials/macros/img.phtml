@@ -1,0 +1,51 @@
+<?php
+use app\helpers\ImageHelper;
+use app\widgets\Spaceless;
+use yii\helpers\Html;
+
+$lazyMacros = function ($url, $alt, array $attrs = []) {
+    Spaceless::begin(); ?>
+    <?php $imageSize = ImageHelper::getSize('@webroot' . $url); ?>
+    <img
+        src="<?= Html::encode($url); ?>"
+        <?php if (!isset($attrs['loading'])): ?>
+        loading="lazy"
+        <?php endif; ?>
+        <?php if ($imageSize->width && $imageSize->height): ?>
+        width="<?= Html::encode($imageSize->width); ?>"
+        height="<?= Html::encode($imageSize->height); ?>"
+        intrinsicsize="<?= Html::encode($imageSize->width); ?>x<?= Html::encode($imageSize->height); ?>"
+        <?php endif; ?>
+        <?php foreach ($attrs as $k => $v): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endforeach; ?>
+        alt="<?= Html::encode($alt); ?>"
+    >
+<?php
+    Spaceless::end();
+};
+
+$pictureMacros = function ($url, $alt, array $attrs = []) {
+    Spaceless::begin(); ?>
+    <?php $imageSize = ImageHelper::getSize('@webroot' . $url); ?>
+    <picture<?php foreach ($attrs as $k => $v): ?><?php if ('img' != $k): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endif; ?><?php endforeach; ?>>
+        <img
+            src="<?= Html::encode($url); ?>"
+            <?php if (!isset($attrs['img']['loading'])): ?>
+            loading="lazy"
+            <?php endif; ?>
+            <?php if ($imageSize->width && $imageSize->height): ?>
+            width="<?= Html::encode($imageSize->width); ?>"
+            height="<?= Html::encode($imageSize->height); ?>"
+            intrinsicsize="<?= Html::encode($imageSize->width); ?>x<?= Html::encode($imageSize->height); ?>"
+            <?php endif; ?>
+            <?php if (isset($attrs['img'])): ?><?php foreach ($attrs['img'] as $k => $v): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endforeach; ?><?php endif; ?>
+            alt="<?= Html::encode($alt); ?>"
+        >
+    </picture>
+<?php
+    Spaceless::end();
+};
+
+return [
+    'lazy' => $lazyMacros,
+    'picture' => $pictureMacros,
+];

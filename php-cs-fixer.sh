@@ -1,0 +1,1 @@
+php ./vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix --config=php-cs-fixer.php_cs --verbose

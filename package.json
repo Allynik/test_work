@@ -1,0 +1,18 @@
+{
+  "name": "yii2-starter-pack",
+  "version": "1.0.0",
+  "description": "yii2-starter-pack",
+  "scripts": {
+    "html-beautify": "node ./html-beautify.js"
+  },
+  "author": "pitcher.agency",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Intecmedia/yii2-starter-pack/issues"
+  },
+  "homepage": "https://github.com/Intecmedia/yii2-starter-pack#readme",
+  "dependencies": {
+    "glob": "^8.0.3",
+    "js-beautify": "^1.14.3"
+  }
+}

@@ -1,0 +1,105 @@
+<?php
+
+use app\helpers\ImageHelper;
+use app\widgets\Spaceless;
+use yii\helpers\Html;
+
+!defined('IMAGE_HELPER_DEFAULT_SOURCES') && define('IMAGE_HELPER_DEFAULT_SOURCES', [
+    ['(max-width: 575.98px)', ['width' => '576', 'height' => null, 'profile' => 'xs']],
+    ['(max-width: 767.98px)', ['width' => '768', 'height' => null, 'profile' => 'sm']],
+    ['(max-width: 991.98px)', ['width' => '992', 'height' => null, 'profile' => 'md']],
+    ['(max-width: 1199.98px)', ['width' => '1200', 'height' => null, 'profile' => 'lg']],
+    ['(min-width: 1200px)', ['width' => '1920', 'height' => null, 'profile' => 'xl']],
+]);
+
+!defined('IMAGE_HELPER_DEFAULT_OPTIONS') && define('IMAGE_HELPER_DEFAULT_OPTIONS', []);
+
+$sourcesMacros = function ($url, $alt, array $attrs = [], array $sources = IMAGE_HELPER_DEFAULT_SOURCES, $options = IMAGE_HELPER_DEFAULT_OPTIONS) {
+    Spaceless::begin(); ?>
+    <?php $imageSize = ImageHelper::getSize('@webroot' . $url); ?>
+    <picture<?php foreach ($attrs as $k => $v): ?><?php if ('img' != $k): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endif; ?><?php endforeach; ?>>
+        <?php if (in_array($imageSize->mime, ['image/png', 'image/jpg', 'image/jpeg'])): ?>
+
+        <?php if (Yii::$app->imageHelper->avif['enabled'] && !(isset($options['noavif']) && $options['noavif'])): ?>
+        <?php foreach ($sources as [$media, $profile]): ?>
+        <source<?php if ($media): ?> media="<?= Html::encode($media); ?>"<?php endif; ?> srcset="<?= ImageHelper::createThumb($profile + ['extension' => 'avif'], '@webroot' . $url); ?>" type="image/avif">
+        <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php if (Yii::$app->imageHelper->webp['enabled'] && !(isset($options['nowebp']) && $options['nowebp'])): ?>
+        <?php foreach ($sources as [$media, $profile]): ?>
+        <source<?php if ($media): ?> media="<?= Html::encode($media); ?>"<?php endif; ?> srcset="<?= ImageHelper::createThumb($profile + ['extension' => 'webp'], '@webroot' . $url); ?>" type="image/webp">
+        <?php endforeach; ?>
+        <?php endif; ?>
+
+        <?php foreach ($sources as [$media, $profile]): ?>
+        <source<?php if ($media): ?> media="<?= Html::encode($media); ?>"<?php endif; ?> srcset="<?= ImageHelper::createThumb($profile, '@webroot' . $url); ?>" type="<?= Html::encode($imageSize->mime); ?>">
+        <?php endforeach; ?>
+
+        <?php if (Yii::$app->imageHelper->avif['enabled'] && !(isset($options['noavif']) && $options['noavif'])): ?>
+        <source srcset="<?= ImageHelper::createThumb(['profile' => 'avif', 'extension' => 'avif'], '@webroot' . $url); ?>" type="image/avif">
+        <?php endif; ?>
+
+        <?php if (Yii::$app->imageHelper->webp['enabled'] && !(isset($options['nowebp']) && $options['nowebp'])): ?>
+        <source srcset="<?= ImageHelper::createThumb(['profile' => 'webp', 'extension' => 'webp'], '@webroot' . $url); ?>" type="image/webp">
+        <?php endif; ?>
+
+        <?php endif; ?>
+
+        <img
+            src="<?= Html::encode($url); ?>"
+            <?php if (!isset($attrs['img']['loading'])): ?>
+            loading="lazy"
+            <?php endif; ?>
+            <?php if ($imageSize->width && $imageSize->height): ?>
+            width="<?= Html::encode($imageSize->width); ?>"
+            height="<?= Html::encode($imageSize->height); ?>"
+            intrinsicsize="<?= Html::encode($imageSize->width); ?>x<?= Html::encode($imageSize->height); ?>"
+            <?php endif; ?>
+            <?php if (isset($attrs['img'])): ?><?php foreach ($attrs['img'] as $k => $v): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endforeach; ?><?php endif; ?>
+            alt="<?= Html::encode($alt); ?>"
+        >
+    </picture>
+<?php
+    Spaceless::end();
+};
+
+$pictureMacros = function ($url, $alt, array $attrs = [], $options = IMAGE_HELPER_DEFAULT_OPTIONS) {
+    Spaceless::begin(); ?>
+    <?php $imageSize = ImageHelper::getSize('@webroot' . $url); ?>
+    <picture<?php foreach ($attrs as $k => $v): ?><?php if ('img' != $k): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endif; ?><?php endforeach; ?>>
+
+        <?php if (in_array($imageSize->mime, ['image/png', 'image/jpg', 'image/jpeg'])): ?>
+
+        <?php if (Yii::$app->imageHelper->avif['enabled'] && !(isset($options['noavif']) && $options['noavif'])): ?>
+        <source srcset="<?= ImageHelper::createThumb(['profile' => 'avif', 'extension' => 'avif'], '@webroot' . $url); ?>" type="image/webp">
+        <?php endif; ?>
+
+        <?php if (Yii::$app->imageHelper->webp['enabled'] && !(isset($options['nowebp']) && $options['nowebp'])): ?>
+        <source srcset="<?= ImageHelper::createThumb(['profile' => 'webp', 'extension' => 'webp'], '@webroot' . $url); ?>" type="image/webp">
+        <?php endif; ?>
+
+        <?php endif; ?>
+
+        <img
+            src="<?= Html::encode($url); ?>"
+            <?php if (!isset($attrs['img']['loading'])): ?>
+            loading="lazy"
+            <?php endif; ?>
+            <?php if ($imageSize->width && $imageSize->height): ?>
+            width="<?= Html::encode($imageSize->width); ?>"
+            height="<?= Html::encode($imageSize->height); ?>"
+            intrinsicsize="<?= Html::encode($imageSize->width); ?>x<?= Html::encode($imageSize->height); ?>"
+            <?php endif; ?>
+            <?php if (isset($attrs['img'])): ?><?php foreach ($attrs['img'] as $k => $v): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endforeach; ?><?php endif; ?>
+            alt="<?= Html::encode($alt); ?>"
+        >
+    </picture>
+<?php
+    Spaceless::end();
+};
+
+return [
+    'sources' => $sourcesMacros,
+    'picture' => $pictureMacros,
+];

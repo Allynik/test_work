@@ -1,0 +1,19 @@
+<?php
+use app\helpers\CommonHelper;
+use app\widgets\Spaceless;
+use yii\helpers\Html;
+
+$svgUrl = CommonHelper::urlmtime('/assets/front/build/img/svg-sprite.svg');
+
+$svgMacros = function ($name, array $attrs = []) use ($svgUrl) {
+    Spaceless::begin(); ?>
+    <svg<?php foreach ($attrs as $k => $v): ?> <?= Html::encode($k); ?>="<?= Html::encode($v); ?>"<?php endforeach; ?>>
+        <use xlink:href="<?= Html::encode($svgUrl); ?>#icon-<?= Html::encode($name); ?>" />
+    </svg>
+<?php
+    Spaceless::end();
+};
+
+return [
+    'svg' => $svgMacros,
+];
