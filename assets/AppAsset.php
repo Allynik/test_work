@@ -21,7 +21,19 @@ class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
-    public $css = [];
-    public $js = [];
+    public $css = [
+//        'assets/front/css/app.min.css',
+//        'assets/front/css/app.min.css.br',
+//        'assets/front/css/app.min.css.gz',
+//       'assets/front/css/def_yii.css'
+    ];
+    public $js = [
+//        'assets/front/js/app.min.js',
+//        'assets/front/js/app.min.br',
+//        'assets/front/js/app.min.gz',
+//        'assets/front/js/vendor.min.js',
+//        'assets/front/js/vendor.min.js.br',
+//        'assets/front/js/vendor.min.js.gz',
+    ];
     public $depends = [];
 }

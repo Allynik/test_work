@@ -127,6 +127,30 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'pattern' => '/admin/maillog/<action:\w+>',
                 'route' => 'admin/maillog/<action>',
             ],
+            [
+                'pattern' => '/admin/blog',
+                'route' => 'admin/blog/index',
+            ],
+            [
+                'pattern' => '/admin/blog/<action:\w+>',
+                'route' => 'admin/blog/<action>',
+            ],
+            [
+                'pattern' => '/admin/application',
+                'route' => 'admin/application/index',
+            ],
+            [
+                'pattern' => '/admin/application/<action:\w+>',
+                'route' => 'admin/application/<action>',
+            ],
+            [
+            'pattern' => '/admin/categories',
+            'route' => 'admin/categories/index',
+        ],
+            [
+                'pattern' => '/admin/categories/<action:\w+>',
+                'route' => 'admin/categories/<action>',
+            ],
         ]);
     }
 }

@@ -63,6 +63,7 @@ $config = [
         'request' => [
             'class' => 'app\components\Request',
             'cookieValidationKey' => env('APP_KEY'),
+            'baseUrl' => '',
         ],
         'response' => [
             'formatters' => [
@@ -87,7 +88,8 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => true,
+//         'enableStrictParsing' => true,
+            'enableStrictParsing' => false,
             'normalizer' => [
                 'class' => 'yii\web\UrlNormalizer',
                 'action' => 301,
@@ -100,6 +102,10 @@ $config = [
                 'maintenance' => [
                     'pattern' => '/maintenance',
                     'route' => 'site/maintenance',
+                ],
+                'blog' => [
+                  'pattern' => '/blog',
+                  'route' => 'site/blog'
                 ],
             ],
         ],
@@ -128,12 +134,12 @@ $config['bootstrap'] = array_merge($config['bootstrap'], ['pages']);
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
 
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '::1'],
-    ];
+//    $config['bootstrap'][] = 'debug';
+//    $config['modules']['debug'] = [
+//        'class' => 'yii\debug\Module',
+//        // uncomment the following to add your IP if you are not connecting from localhost.
+//        'allowedIPs' => ['127.0.0.1', '::1'],
+//    ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [

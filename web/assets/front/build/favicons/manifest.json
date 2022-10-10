@@ -1,0 +1,25 @@
+{
+    "public_path": "/",
+    "entrypoints": {
+        "app": {
+            "assets": {
+                "js": [
+                    {
+                        "src": "/js/vendor.min.js",
+                        "integrity": "sha256-q2sE7r2hA2BDcLmGCaZ6rWuFCVwcN8OjpfvX/xFI/zA="
+                    },
+                    {
+                        "src": "/js/app.min.js",
+                        "integrity": "sha256-KEHNXEioPXueGHvrbQd19zuFRYg/3fcjGvIG86c/2H4="
+                    }
+                ],
+                "css": [
+                    {
+                        "src": "/css/app.min.css",
+                        "integrity": "sha256-BAKVKMpKWzW7ySqxf05qgcTkAZNzBotk1xnyfjqaZdU="
+                    }
+                ]
+            }
+        }
+    }
+}

@@ -35,7 +35,7 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
-<html class="no-js is-scroll-unknown" lang="<?= Yii::$app->language; ?>" data-public-path="/assets/front/build/"
+<html class="no-js is-scroll-unknown" lang="<?= Yii::$app->language; ?>" data-public-path="assets/front/"
       data-node-env="production">
 <!-- set webpack public path on the fly https://webpack.js.org/guides/public-path/#set-value-on-the-fly -->
 
@@ -47,13 +47,41 @@ AppAsset::register($this);
 
     <title><?= Html::encode($metaTitle); ?></title>
     <meta name="description" content="<?= Html::encode($metaDescription); ?>">
-
+    <script>
+        (document.documentElement && document.documentElement.className && (function($html) {
+            // js test
+            $html.className = $html.className.replace('no-js', 'js');
+            // webp support test
+            var webp = new Image();
+            webp.onload = webp.onerror = function() {
+                $html.className += (webp.width == 1 && webp.height == 1 ? ' webp' : ' no-webp');
+            };
+            webp.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+            // avif support test
+            var avif = new Image();
+            avif.onload = avif.onerror = function() {
+                $html.className += (avif.width == 1 && avif.height == 1 ? ' avif' : ' no-avif');
+            };
+            avif.src = [
+                'data:image/avif;base64,AAAAIGZ0eXBhdmlmAAAAAGF2aWZtaWYxbWlhZk1BMUIAAAEcbWV0YQAAAAAAAABIaGRscgAAAAAAAAAAcGljdAAAAAAAAAAA',
+                'AAAAAGNhdmlmIC0gaHR0cHM6Ly9naXRodWIuY29tL2xpbmstdS9jYXZpZgAAAAAeaWxvYwAAAAAEQAABAAEAAAAAAUQAAQAAABcAAAAqaWluZgEAAAAAAAA',
+                'BAAAAGmluZmUCAAAAAAEAAGF2MDFJbWFnZQAAAAAOcGl0bQAAAAAAAQAAAHJpcHJwAAAAUmlwY28AAAAQcGFzcAAAAAEAAAABAAAAFGlzcGUAAAAAAAAAAQ',
+                'AAAAEAAAAQcGl4aQAAAAADCAgIAAAAFmF2MUOBAAwACggYAAYICGgIIAAAABhpcG1hAAAAAAAAAAEAAQUBAoMDhAAAAB9tZGF0CggYAAYICGgIIBoFHiAAA',
+                'EQiBACwDoA='
+            ].join('');
+            // viewport sizes
+            var viewportHeight = window.visualViewport ? window.visualViewport.height : window.innerHeight;
+            $html.style.setProperty('--vh', (viewportHeight * 0.01) + 'px');
+            // mobile detect
+            var mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            $html.className += (mobile ? ' mobile' : ' no-mobile');
+        })(document.documentElement));
+    </script>
     <?= $this->render('@partials/open-graph'); ?>
     <?= $this->render('@partials/favicons'); ?>
 
     <?= $this->render('@partials/counters-head'); ?>
-
-    <?php $styleApp = CommonHelper::urlmtime('/assets/front/build/css/app.min.css'); ?>
+    <?php $styleApp = CommonHelper::urlmtime('assets/front/css/app.min.css?27497a4050920177228b'); ?>
     <link href="<?= Html::encode($styleApp); ?>" rel="stylesheet">
     <?php if (!$isBarbaRequest) {
         Yii::$app->response->headers->add('Link', "<$styleApp>; rel=preload; as=style");
@@ -67,31 +95,20 @@ AppAsset::register($this);
 
     <?= $this->render('@partials/counters-body-open'); ?>
 
-    <div class="wrap">
-        <div class="container">
             <?= Breadcrumbs::widget([
                 'links' => $this->params['breadcrumbs'] ?? [],
             ]); ?>
             <?= Alert::widget(); ?>
             <?= $content; ?>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; <?= Html::encode(Yii::$app->name); ?> <?= date('Y'); ?></p>
-        </div>
-    </footer>
-
     <?= $this->render('@partials/counters-body-close'); ?>
 
-    <?php $scriptVendor = CommonHelper::urlmtime('/assets/front/build/js/vendor.min.js'); ?>
+    <?php $scriptVendor = CommonHelper::urlmtime('assets/front/js/vendor.min.js?27497a4050920177228b'); ?>
     <script src="<?= Html::encode($scriptVendor); ?>"></script>
     <?php if (!$isBarbaRequest) {
         Yii::$app->response->headers->add('Link', "<$scriptVendor>; rel=preload; as=script");
     } ?>
 
-    <?php $scriptApp = CommonHelper::urlmtime('/assets/front/build/js/app.min.js'); ?>
+    <?php $scriptApp = CommonHelper::urlmtime('assets/front/js/app.min.js?27497a4050920177228b'); ?>
     <script src="<?= Html::encode($scriptApp); ?>"></script>
     <?php if (!$isBarbaRequest) {
         Yii::$app->response->headers->add('Link', "<$scriptApp>; rel=preload; as=script");

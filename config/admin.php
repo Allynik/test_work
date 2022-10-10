@@ -49,5 +49,32 @@ return [
             ],
             'accessAdmin' => true,
         ],
+        [
+            'group' => 'Блог',
+            'url' => '/admin/blog',
+            'icon' => 'fa-lg fa-fw fa fa-list',
+            'links' => [
+                '/admin/blog' => 'Блог'
+            ],
+            'accessAdmin' => true,
+        ],
+        [
+        'group' => 'Заявка',
+        'url' => '/admin/application',
+        'icon' => 'fa-lg fa-fw fa fa-list',
+        'links' => [
+            '/admin/application' => 'Заявка'
+        ],
+        'accessAdmin' => true,
+    ],
+        [
+            'group' => 'Категории',
+            'url' => '/admin/categories',
+            'icon' => 'fa-lg fa-fw fa fa-list',
+            'links' => [
+                '/admin/categories' => 'Категории'
+            ],
+            'accessAdmin' => true,
+        ],
     ],
 ];
